@@ -49,10 +49,10 @@ subtitle.text = "plot_from_hnn.py"
 
 # time delay
 delays=[0,20,30,40,50,60,70,80,100,120,140,160,180,200,220,240,250,300,400,500,600]#[50, 100, 150, 200, 300, 400, 500, 600]
-delayed_input_type=['default']#,'Supra_ERPYesSupraT']# also try triple later?
+delayed_input_type=['default','Supra_ERPYesSupraT']# also try triple later?
 
 ## pick a param file and tripple those inputs
-param_files=['default']#,'Supra_ERPYesSupraT']
+param_files=['default','Supra_ERPYesSupraT']
 add10=True
 triple_pulse=True
     
