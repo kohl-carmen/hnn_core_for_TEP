@@ -26,7 +26,8 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 import sys        
-sys.path.append('C:\\Users\\ckohl\\Documents\\HNN core code\\')
+#sys.path.append('C:\\Users\\ckohl\\Documents\\HNN core code\\')
+sys.path.append('C:\\Users\\ckohl\\Documents\/git-hnn_core_for_TEP\\')
 import my_hnn_core_functions as m
 from pptx import Presentation #https://python-pptx.readthedocs.io/en/latest/user/quickstart.html
 from pptx.util import Inches
