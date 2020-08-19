@@ -55,8 +55,12 @@ def plot_hnn_core_output(dpls,net,name,kid,input_table,gaba_table,*args):
     data_dir='C:\\Users\\ckohl\\Documents\\SourcePlay\\NewAEP\\'
     data_name= 'adult_right.txt'
     data_dir='C:\\Users\\ckohl\\Documents\\SourcePlay\\NewTiina\\'
-    data_name='Adult_Tone-R Hemi-r.txt'
     data_name_kid= 'kid(9,10)_right.txt'
+    
+    
+    data_dir='C:\\Users\\ckohl\\Documents\\SourcePlay\\NewTiina\\'
+    data_name='Adult_Tone-L Hemi-r.txt'
+    data_name_kid='Adult_Tone-R Hemi-r.txt' 
     data_temp=np.loadtxt(data_dir+data_name)
     data_temp_kid=np.loadtxt(data_dir+data_name_kid)
     data_time=np.zeros(len(data_temp))
@@ -100,25 +104,31 @@ def plot_hnn_core_output(dpls,net,name,kid,input_table,gaba_table,*args):
     trial=0
     keep_for_mean=np.zeros((len(dpls),len(dpls[0].t)))
     for dpl in dpls:
+        ax1.plot(dpl.t,dpl.dpl['agg'],color=[.5, .5, .5],linewidth=1)
         keep_for_mean[trial,:]=dpl.dpl['agg']
         trial=trial+1
-    ax1.plot(dpl.t,np.mean(keep_for_mean,0),color='k',linewidth=3)
-    ax1.plot(data_time,data,color='purple',linewidth=3)
+    ax1.plot(dpl.t,np.mean(keep_for_mean,0),color='k',linewidth=3,label='Model')
+    ax1.plot(data_time,data,color='purple',linewidth=3,label='Data Contra')
     if kid==True:
-        ax1.plot(data_time,data_kid,color='blue',linewidth=3)
+        ax1.plot(data_time,data_kid,color='blue',linewidth=3,label='Data Ipsi')
     ax1.title.set_text('Simulation')
     ax1.set_xlim((0,xlim))
-    ax1.legend(('Model','Data'))
-    for dpl in dpls:
-        ax1.plot(dpl.t,dpl.dpl['agg'],color=[.5, .5, .5],linewidth=1)
+    
+    ax1.legend()
+        
+        
     y_range=ax1.get_ylim()
     y_range=list(y_range)
+    
+     
     #--------------------
     # 2: spiking    
     #--------------------
     ax2=fig.add_subplot(222)
-    spikes = np.array(sum(net.spiketimes, []))
-    gids = np.array(sum(net.spikegids, []))
+    #spikes = np.array(sum(net.spiketimes, []))
+    #gids = np.array(sum(net.spikegids, []))
+    spikes = np.array((net.spiketimes[0]))
+    gids = np.array((net.spikegids[0]))
     cell_types = ['L5_pyramidal', 'L5_basket', 'L2_pyramidal', 'L2_basket']
     cell_colours=['r','b','g',[.5, .5, .5]]
     count=0
@@ -207,8 +217,12 @@ def plot_hnn_core_output(dpls,net,name,kid,input_table,gaba_table,*args):
         else:
             ax5=fig.add_subplot(248)
         ax5.title.set_text('Original Spiking')
-        spikes = np.array(sum(og_net.spiketimes, []))
-        gids = np.array(sum(og_net.spikegids, []))
+        #spikes = np.array(sum(og_net.spiketimes, []))
+        #gids = np.array(sum(og_net.spikegids, []))
+        spikes = np.array((og_net.spiketimes[0]))
+        gids = np.array((og_net.spikegids[0]))
+    
+    
         cell_types = ['L5_pyramidal', 'L5_basket', 'L2_pyramidal', 'L2_basket']
         cell_colours=['r','b','g',[.5, .5, .5]]
         count=0
