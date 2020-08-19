@@ -483,7 +483,9 @@ def core_output_basic(dpls,net,name,data,compare,input_table,paramoitable,*args)
     ax1=fig.add_subplot(221)
     trial=0
     keep_for_mean=np.zeros((len(dpls),len(dpls[0].t)))
+    print('test')
     for dpl in dpls:
+        ax1.plot(dpl.t,dpl.dpl['agg'],color=[.5, .5, .5],linewidth=1)
         keep_for_mean[trial,:]=dpl.dpl['agg']
         trial=trial+1
     ax1.plot(dpl.t,np.mean(keep_for_mean,0),color='k',linewidth=3)
@@ -494,8 +496,7 @@ def core_output_basic(dpls,net,name,data,compare,input_table,paramoitable,*args)
     ax1.set_xlim((0,xlim))
     ax1.legend(('Model','Data'))
     #ax1.legend(('Model','Contra','Ipsi'))
-    for dpl in dpls:
-        ax1.plot(dpl.t,dpl.dpl['agg'],color=[.5, .5, .5],linewidth=1)
+
     y_range=ax1.get_ylim()
     y_range=list(y_range)
     
@@ -514,8 +515,10 @@ def core_output_basic(dpls,net,name,data,compare,input_table,paramoitable,*args)
     # 2: spiking    
     #--------------------
     ax2=fig.add_subplot(222)
-    spikes = np.array(sum(net.spiketimes, []))
-    gids = np.array(sum(net.spikegids, []))
+    #spikes = np.array(sum(net.spiketimes, []))
+    #gids = np.array(sum(net.spikegids, []))
+    spikes = np.array((net.spiketimes[0]))
+    gids = np.array((net.spikegids[0]))
     cell_types = ['L5_pyramidal', 'L5_basket', 'L2_pyramidal', 'L2_basket']
     cell_colours=['r','b','g',[.5, .5, .5]]
     count=0
